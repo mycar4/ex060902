@@ -22,7 +22,8 @@ st.set_page_config(page_title="AI 업무 비서 대시보드", page_icon="🤖",
 
 # 환경 변수 로드
 load_dotenv()
-openai_api_key = os.getenv("OPENAI_API_KEY")
+#  openai_api_key = os.getenv("OPENAI_API_KEY") - https://streamlit.io/cloud 배포전
+openai_api_key = os.getenv("KEY")
 
 # ==========================================
 # 1. 유튜브 요약기 기능
