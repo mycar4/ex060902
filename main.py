@@ -76,7 +76,13 @@ def render_youtube_app():
                 with st.expander("원본 자막 내용 보기"):
                     st.text(transcript)
             except Exception as e:
-                st.error(f"오류가 발생했습니다: {str(e)}")
+                error_msg = str(e)
+                # 클라우드 IP 차단 에러일 경우 친절한 메시지로 대체
+                if "blocking requests" in error_msg or "cloud provider" in error_msg:
+                    st.error("🚫 유튜브 보안 정책으로 인해 현재 클라우드 서버에서는 자막을 가져올 수 없습니다.")
+                    st.info("💡 팁: 이 기능은 로컬(내 컴퓨터) 환경에서 실행하면 정상적으로 작동합니다!")
+                else:
+                    st.error(f"오류가 발생했습니다: {error_msg}")
 
 # ==========================================
 # 2. 문서 요정 (RAG 챗봇) 기능
