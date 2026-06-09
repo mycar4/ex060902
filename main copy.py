@@ -1,6 +1,6 @@
 import os
 import tempfile
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 import streamlit as st
 
 # --- LangChain 공통 패키지 ---
@@ -21,16 +21,8 @@ from langchain_community.vectorstores import FAISS
 st.set_page_config(page_title="AI 업무 비서 대시보드", page_icon="🤖", layout="wide")
 
 # 환경 변수 로드
-# --- API 키 로딩 로직 (로컬 & 클라우드 동시 지원) ---
-try:
-    # 1. Streamlit Cloud 환경에서 먼저 시도
-    openai_api_key = st.secrets["OPENAI_API_KEY"]
-except (KeyError, FileNotFoundError):
-    # 2. 로컬 환경(.env)에서 시도 (클라우드에 키가 없을 경우)
-    from dotenv import load_dotenv
-    import os
-    load_dotenv()
-    openai_api_key = os.getenv("OPENAI_API_KEY")
+load_dotenv()
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 # ==========================================
 # 1. 유튜브 요약기 기능
